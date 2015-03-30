@@ -158,5 +158,17 @@ public class Database {
         }
         
         return userPhotos;
-    } 
+    }
+    
+    public void editPhotoCaption(int photoID, String caption){
+        sql = "UPDATE photo"
+            + " SET caption = '" + caption + "'"
+            + " WHERE photoID = '" + photoID + "'";
+        
+        try{
+            stmt.executeUpdate(sql);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
