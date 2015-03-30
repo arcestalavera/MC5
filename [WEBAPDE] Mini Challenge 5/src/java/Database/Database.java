@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Database;
 
 import java.sql.Connection;
@@ -17,104 +16,95 @@ import java.sql.Statement;
  * @author Arces
  */
 public class Database {
+
     private Connection con;
     private String sql;
     private Statement stmt;
     private ResultSet rs;
     private static Database databaseInstance = new Database();
-    
-    private Database(){
-        try{
+
+    private Database() {
+        try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             String host = "jdbc:mysql://127.0.0.1:3306/minichallenge5?user=root";
             String uUser = "root";
             String uPass = "admin";
-            
+
             con = DriverManager.getConnection(host, uUser, uPass);
             stmt = con.createStatement();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public static Database getInstance(){
+
+    public static Database getInstance() {
         return databaseInstance;
     }
-    
-    public void addUser(String username, String password){
+
+    public void addUser(String username, String password) {
         int maxUser = 1;
-        
+
         sql = "SELECT MAX(userID) FROM user";
-        
-        try{
+
+        try {
             rs = stmt.executeQuery(sql);
-            
-            if(rs.next())
-            {
+
+            if (rs.next()) {
                 maxUser = rs.getInt("MAX(userID)") + 1;
             }
-            
+
             sql = "INSERT INTO user"
                     + " VALUES(" + maxUser + ", '" + username + "', '" + password + "')";
-            
+
             stmt.executeUpdate(sql);
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
-<<<<<<< HEAD
-    public boolean validateUsername(String username){
+
+    public boolean validateUsername(String username) {
         boolean isFound = false;
-        
+
         sql = "SELECT username FROM user"
                 + " WHERE username = '" + username + "'";
-=======
-    
-    public void addPicture(String username, String path, String caption){
-        int userID = 1;
-        int photoID = 1;
-        
-        sql = "SELECT userID from user where username = " + username;
->>>>>>> origin/master
-        
-        try{
+
+        try {
             rs = stmt.executeQuery(sql);
-            if(rs.next())
-            {
-<<<<<<< HEAD
+            if (rs.next()) {
                 isFound = true;
-=======
-                userID = rs.getInt("userID");
-                sql = "SELECT MAX(photoID) FROM photo";
-                try{
-                    rs = stmt.executeQuery(sql);
-                    if(rs.next()){
-                        photoID = rs.getInt("MAX(photoID)");
-                        
-                        sql = "INSERT INTO photo"
-                            + " VALUES(" + photoID +", " + userID + ", '" + path + "', '" + caption + "');";
-                        try{
-                            stmt.executeUpdate(sql);
-                        }catch(SQLException e){
-                            e.printStackTrace();
-                        }
-                    }
-                } catch(SQLException e){
-                    e.printStackTrace();
-                }
->>>>>>> origin/master
             }
-        } catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
-        
+
         return isFound;
     }
-    
-=======
+
+    public void addPicture(String username, String path, String caption) {
+        int userID = 1;
+        int photoID = 1;
+
+        sql = "SELECT userID from user where username = " + username;
+        try {
+            rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                userID = rs.getInt("userID");
+            }
+
+            sql = "SELECT MAX(photoID) FROM photo";
+            rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                photoID = rs.getInt("MAX(photoID)") + 1;
+            }
+
+            sql = "INSERT INTO photo"
+                    + " VALUES(" + photoID + ", " + userID + ", '" + path + "', '" + caption + "');";
+
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
->>>>>>> origin/master
 }
