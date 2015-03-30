@@ -14,7 +14,8 @@
         </script>
         <script type = "text/javascript" src = "js/Login.js">
         </script>
-        <title>Welcome!</title>
+        <link rel="shortcut icon" href="img/KrakenIco.ico"/>
+        <title>Welcome to Kraken - Release It!</title>
     </head>
     <body>
         <br/><br/><br/>
