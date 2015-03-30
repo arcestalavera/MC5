@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package MC3_Database;
+package Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -64,4 +64,37 @@ public class Database {
         }
     }
     
+    
+    public void addPicture(String username, String path, String caption){
+        int userID = 1;
+        
+        sql = "SELECT userID from user where username = " + username;
+        
+        try{
+            rs = stmt.executeQuery(sql);
+            if(rs.next())
+            {
+                userID = rs.getInt("userID");
+                sql = "SELECT MAX(photoID) FROM photo";
+                try{
+                    rs = stmt.executeQuery(sql);
+                    if(rs.next()){
+                        int photoID = rs.getInt("MAX(photoID)");
+                        
+                        sql = "INSERT INTO photo"
+                            + " VALUES(" + photoID +", '" + userID + "', '" + path + "', '" + caption + "');";
+                        try{
+                            stmt.executeUpdate(sql);
+                        }catch(SQLException e){
+                            e.printStackTrace();
+                        }
+                    }
+                } catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
