@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Servlet;
 
-import Database.*;
+import Classes.User;
+import Database.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Arces
  */
-public class SignUp extends HttpServlet {
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,10 @@ public class SignUp extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SignUp</title>");            
+            out.println("<title>Servlet Login</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SignUp at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,21 +75,28 @@ public class SignUp extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         Database db = Database.getInstance();
-        String username = request.getParameter("signusername");
-        String password = request.getParameter("signpassword");
-        
-        request.getSession().removeAttribute("isMatch");
-        if(db.validateUsername(username))
-        {
-            request.getSession().setAttribute("isTaken", true);
+        User loggedUser;
+        String username = request.getParameter("logusername");
+        String password = request.getParameter("logpassword");
+        RequestDispatcher reqDispatcher = null;
+
+        request.getSession().removeAttribute("isTaken");
+        if (!db.validateUsername(username)) {
+            request.getSession().setAttribute("isMatch", false);
+            System.out.println("1");
+            reqDispatcher = request.getRequestDispatcher("Login.jsp");
+        } else if (!db.validatePassword(username, password)) {
+            System.out.println("2");
+            request.getSession().setAttribute("isMatch", false);
+            reqDispatcher = request.getRequestDispatcher("Login.jsp");
+        } else {
+            System.out.println("3");
+            loggedUser = new User(db.getUserID(username), username);
+
+            request.getSession().setAttribute("loggedUser", loggedUser);
+            request.getSession().removeAttribute("isMatch");
+            reqDispatcher = request.getRequestDispatcher("Homepage.jsp");
         }
-        else
-        {
-            request.getSession().setAttribute("isTaken", false);
-            db.addUser(username, password);
-        }
-        
-        RequestDispatcher reqDispatcher = request.getRequestDispatcher("Login.jsp");
         
         reqDispatcher.forward(request, response);
     }

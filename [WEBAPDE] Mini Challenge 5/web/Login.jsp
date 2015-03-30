@@ -21,19 +21,24 @@
         <div id = "login" align = "center">
             <h1 align = "center" id = "loginheader">Log in</h1>
             <div  id = "loginform">
-                <form action = "SignUp" method = "post">
+                <form action = "Login" method = "post">
                     <br/><br/>
                     <input class = "inputform" type = "text" placeholder = "Username" name = "logusername" required/><br/>
                     <input class = "inputform" type = "password" placeholder = "Password" name = "logpassword" required/><br/>
                     <br/><input class = "inputform" type = "submit"/>
                     <%
                         HttpSession reqSession = request.getSession();
-                    %>
-                        <h4>Invalid username/password</h4>
-                    <%
+                        Boolean isMatch = (Boolean) reqSession.getAttribute("isMatch");
                         Boolean isTaken = (Boolean) reqSession.getAttribute("isTaken");
 
-                        if (isTaken != null) {
+                        if(isMatch != null){
+                            if (!isMatch){
+                    %>
+                        <h4>Invalid username/password.</h4>
+                    <%
+                            }
+                        }
+                        else if (isTaken != null) {
                             if (isTaken) {
                     %>
                         <h4>Sorry, that username is already taken.</h4>

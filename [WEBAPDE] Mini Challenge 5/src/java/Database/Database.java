@@ -107,4 +107,41 @@ public class Database {
             e.printStackTrace();
         }
     }
+    
+    public boolean validatePassword(String username, String password){
+        boolean isMatch = false;
+        
+        sql = "SELECT * from user"
+                + " WHERE username = '" + username + "' AND password = '" + password + "'";
+        
+        try{
+            rs = stmt.executeQuery(sql);
+            if(rs.next())
+            {
+                isMatch = true;
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return isMatch;
+    }
+    
+    public int getUserID(String username){
+        int userID = 0;
+        sql = "SELECT userID FROM user"
+                + " WHERE username = '" + username + "'";
+        
+        try{
+            rs = stmt.executeQuery(sql);
+            if(rs.next())
+            {
+                userID = rs.getInt("userID");
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return userID;
+    }
 }
