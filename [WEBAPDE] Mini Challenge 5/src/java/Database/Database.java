@@ -5,11 +5,13 @@
  */
 package Database;
 
+import Classes.Photo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,7 +30,7 @@ public class Database {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             String host = "jdbc:mysql://127.0.0.1:3306/minichallenge5?user=root";
             String uUser = "root";
-            String uPass = "admin";
+            String uPass = "password";
 
             con = DriverManager.getConnection(host, uUser, uPass);
             stmt = con.createStatement();
@@ -144,4 +146,24 @@ public class Database {
         
         return userID;
     }
+    
+    public ArrayList<Photo> getUserPhoto(int userID){
+        ArrayList<Photo> userPhotos = new ArrayList<>();
+        sql = "SELECT * from photo"
+                + "WHERE userID = " + userID;
+        try{
+            rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                int photoID = rs.getInt("photoID");
+                String path = rs.getString("path");
+                String caption = rs.getString("caption");
+                Photo photo = new Photo(photoID, path, caption);
+                userPhotos.add(photo);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return userPhotos;
+    } 
 }

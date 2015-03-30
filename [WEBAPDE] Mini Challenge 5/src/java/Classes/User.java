@@ -6,6 +6,8 @@
 
 package Classes;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Arces
@@ -13,10 +15,12 @@ package Classes;
 public class User {
     private String username;
     private int userID;
+    private ArrayList<Photo> userPhotos;
     
     public User(int userID, String username){
         this.userID = userID;
         this.username = username;
+        userPhotos = new ArrayList<>();
     }
 
     /**
@@ -45,5 +49,13 @@ public class User {
      */
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public ArrayList<Photo> getUserPhotos() {
+        return userPhotos;
+    }
+
+    public void setUserPhotos(ArrayList<Photo> userPhotos) {
+        this.userPhotos = userPhotos;
     }
 }

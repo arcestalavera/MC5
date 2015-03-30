@@ -5,11 +5,8 @@
  */
 package Servlet;
 
-import Classes.User;
-import Database.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Arces
+ * @author Arren Antioquia
  */
-public class Login extends HttpServlet {
+public class Upload extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +35,10 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");
+            out.println("<title>Servlet Upload</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Upload at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,35 +70,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        Database db = Database.getInstance();
-        User loggedUser;
-        String username = request.getParameter("logusername");
-        String password = request.getParameter("logpassword");
-        RequestDispatcher reqDispatcher = null;
-
-        request.getSession().removeAttribute("isTaken");
-        if (!db.validateUsername(username)) {
-            request.getSession().setAttribute("isMatch", false);
-            System.out.println("1");
-            reqDispatcher = request.getRequestDispatcher("Login.jsp");
-        } else if (!db.validatePassword(username, password)) {
-            System.out.println("2");
-            request.getSession().setAttribute("isMatch", false);
-            reqDispatcher = request.getRequestDispatcher("Login.jsp");
-        } else {
-            System.out.println("3");
-            loggedUser = new User(db.getUserID(username), username);
-            // get pictures from database;
-            loggedUser.setUserPhotos(db.getUserPhoto(db.getUserID(username)));
-            
-            request.getSession().setAttribute("loggedUser", loggedUser);
-            request.getSession().removeAttribute("isMatch");
-            
-            reqDispatcher = request.getRequestDispatcher("Homepage.jsp");
-        }
-        
-        reqDispatcher.forward(request, response);
+        processRequest(request, response);
     }
 
     /**
