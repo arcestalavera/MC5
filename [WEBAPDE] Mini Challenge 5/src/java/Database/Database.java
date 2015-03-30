@@ -64,23 +64,57 @@ public class Database {
         }
     }
     
+<<<<<<< HEAD
     public boolean validateUsername(String username){
         boolean isFound = false;
         
         sql = "SELECT username FROM user"
                 + " WHERE username = '" + username + "'";
+=======
+    
+    public void addPicture(String username, String path, String caption){
+        int userID = 1;
+        int photoID = 1;
+        
+        sql = "SELECT userID from user where username = " + username;
+>>>>>>> origin/master
         
         try{
             rs = stmt.executeQuery(sql);
             if(rs.next())
             {
+<<<<<<< HEAD
                 isFound = true;
+=======
+                userID = rs.getInt("userID");
+                sql = "SELECT MAX(photoID) FROM photo";
+                try{
+                    rs = stmt.executeQuery(sql);
+                    if(rs.next()){
+                        photoID = rs.getInt("MAX(photoID)");
+                        
+                        sql = "INSERT INTO photo"
+                            + " VALUES(" + photoID +", " + userID + ", '" + path + "', '" + caption + "');";
+                        try{
+                            stmt.executeUpdate(sql);
+                        }catch(SQLException e){
+                            e.printStackTrace();
+                        }
+                    }
+                } catch(SQLException e){
+                    e.printStackTrace();
+                }
+>>>>>>> origin/master
             }
         } catch(SQLException e){
             e.printStackTrace();
         }
+<<<<<<< HEAD
         
         return isFound;
     }
     
+=======
+    }
+>>>>>>> origin/master
 }
