@@ -1,0 +1,75 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 03 30, 15, 12:19:16 PM
+    Author     : Arces
+*/
+
+#signupheader, #loginheader{
+    background-color: #08B0C0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    color: white;
+    margin-bottom: 0;
+    padding: 10px;
+    width: 100%;
+}
+
+#signupheader{
+    bottom: 0px;
+    position: absolute;
+}
+
+#signupheader:hover{
+    cursor: pointer;
+}
+
+#signup, #login{
+    font-family: arial;
+    margin-left: 35%;
+    width: 25%;
+    position: fixed;
+}
+
+#login{
+    opacity: 0;
+}
+
+#signup{
+    bottom: 0;
+    position: fixed;
+}
+
+#signupform, #loginform{
+    background-color: skyblue;
+    height: 170px;
+    margin: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    bottom: 50%;
+    width: 100%;
+    padding: 10px;
+}
+
+#signupform{
+    display: none;
+    position: absolute;
+}
+
+.inputform{
+    padding: 9px;
+}
+
+input[type='submit']{
+    background-color: white;
+    border: none;
+}
+
+input[type='submit']:hover{
+    background-color: seashell;
+    cursor: pointer;
+    box-shadow: 0px 1px 1px 0px rgba(100, 80, 140, .8);
+}

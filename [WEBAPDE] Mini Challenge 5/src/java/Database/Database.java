@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package MC3_Database;
+package Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -52,7 +52,7 @@ public class Database {
             
             if(rs.next())
             {
-                maxUser = rs.getInt("MAX(userID)");
+                maxUser = rs.getInt("MAX(userID)") + 1;
             }
             
             sql = "INSERT INTO user"
@@ -62,6 +62,25 @@ public class Database {
         } catch(SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    public boolean validateUsername(String username){
+        boolean isFound = false;
+        
+        sql = "SELECT username FROM user"
+                + " WHERE username = '" + username + "'";
+        
+        try{
+            rs = stmt.executeQuery(sql);
+            if(rs.next())
+            {
+                isFound = true;
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return isFound;
     }
     
 }
