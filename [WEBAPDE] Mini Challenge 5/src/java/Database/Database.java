@@ -67,6 +67,7 @@ public class Database {
     
     public void addPicture(String username, String path, String caption){
         int userID = 1;
+        int photoID = 1;
         
         sql = "SELECT userID from user where username = " + username;
         
@@ -79,10 +80,10 @@ public class Database {
                 try{
                     rs = stmt.executeQuery(sql);
                     if(rs.next()){
-                        int photoID = rs.getInt("MAX(photoID)");
+                        photoID = rs.getInt("MAX(photoID)");
                         
                         sql = "INSERT INTO photo"
-                            + " VALUES(" + photoID +", '" + userID + "', '" + path + "', '" + caption + "');";
+                            + " VALUES(" + photoID +", " + userID + ", '" + path + "', '" + caption + "');";
                         try{
                             stmt.executeUpdate(sql);
                         }catch(SQLException e){
