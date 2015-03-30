@@ -16,7 +16,8 @@
         <div>
             <form>
                 <h3>Release here: <h3>
-                <input type = "text" placeholder = "Photo URL"/>
+                <input type = "text" name = "photoURL" placeholder = "Photo URL"/>
+                <input type = "text" name = "photoCaption" placeholder = "Caption"/>
                 <input type = "submit" />
             </form>
         </div>

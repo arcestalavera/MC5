@@ -82,17 +82,10 @@ public class Database {
         return isFound;
     }
 
-    public void addPicture(String username, String path, String caption) {
-        int userID = 1;
+    public void addPicture(int userID, String path, String caption) {
         int photoID = 1;
-
-        sql = "SELECT userID from user where username = " + username;
+        
         try {
-            rs = stmt.executeQuery(sql);
-            if (rs.next()) {
-                userID = rs.getInt("userID");
-            }
-
             sql = "SELECT MAX(photoID) FROM photo";
             rs = stmt.executeQuery(sql);
 

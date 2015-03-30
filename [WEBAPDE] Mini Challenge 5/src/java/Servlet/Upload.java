@@ -5,12 +5,15 @@
  */
 package Servlet;
 
+import Classes.User;
+import Database.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -70,7 +73,16 @@ public class Upload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("loggedUser");
+        
+        int userID = user.getUserID();
+        String path = request.getParameter("photoURL");
+        String caption = request.getParameter("photoCaption");
+        Database db = Database.getInstance();
+        db.addPicture(userID, path, caption);
     }
 
     /**
