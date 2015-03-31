@@ -17,11 +17,11 @@
             <h2 class = "header-item">${loggedUser.getUsername()}</h2>
         </div>
         <div>
-            <form>
+            <form action = "Upload" method = "POST">
                 <h3>Release here: <h3>
                 <input type = "text" name = "photoURL" placeholder = "Photo URL"/>
                 <input type = "text" name = "photoCaption" placeholder = "Caption"/>
-                <input type = "submit" />
+                <input type = "submit" value = "RELEASE"/>
             </form>
         </div>
         

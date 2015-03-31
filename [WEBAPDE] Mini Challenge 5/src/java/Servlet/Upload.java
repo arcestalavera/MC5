@@ -5,7 +5,6 @@
  */
 package Servlet;
 
-import Classes.Photo;
 import Classes.User;
 import Database.Database;
 import java.io.IOException;
@@ -84,11 +83,9 @@ public class Upload extends HttpServlet {
         String path = request.getParameter("photoURL");
         String caption = request.getParameter("photoCaption");
         Database db = Database.getInstance();
-        db.addPicture(userID, path, caption);
+        db.addPhoto(userID, path, caption);
         
-        Photo photo = new Photo(db.getMaxPhotoID() + 1, path, caption);
-        
-        user.getUserPhotos().add(photo);
+        user.setUserPhotos(db.getUserPhoto(user.getUserID()));
         
         RequestDispatcher view = request.getRequestDispatcher("Homepage.jsp");
         view.forward(request, response);

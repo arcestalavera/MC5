@@ -10,9 +10,9 @@
     <body>
         <img src = "<%=request.getParameter("Path")%>" height="500" width="500"/>
         <p><%=request.getParameter("Caption")%></p>
-        <form>
+        <form action = "Edit" method = "POST">
             <input type="hidden" name = "PhotoID" value = "<%=request.getParameter("PhotoID")%>"/>
-            <input type = "text" placeholder = "New Caption"/>
+            <input type = "text" name = "PhotoCaption" placeholder = "New Caption"/>
             <input type = "submit" value = "Edit Caption"/>
         </form>
     </body>

@@ -82,7 +82,7 @@ public class Database {
         return isFound;
     }
 
-    public void addPicture(int userID, String path, String caption) {
+    public void addPhoto(int userID, String path, String caption) {
         int photoID = 1;
         
         try {
