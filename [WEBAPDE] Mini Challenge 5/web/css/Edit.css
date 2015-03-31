@@ -1,0 +1,46 @@
+html, body{
+    margin: 0;
+}
+
+#container{
+    height: 500px;
+    background-color: black;
+}
+
+#image{
+    height: 500px;
+    width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#caption{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-family: sans-serif;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    //text-align: center;
+}
+
+#editCaptionForm{
+    margin-top: 2px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#newCaption{
+    width: 78%;
+}
+
+#editCaptionButton{
+    width: 20%;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

@@ -13,33 +13,35 @@
     </head>
     <body>
         <div id = "header">
-            <h1 class = "header-item">PicKraken</h1>
-            <h2 class = "header-item">${loggedUser.getUsername()}</h2>
+            <img src = "img/KrakenLogo.png" id ="logo" width = "70" height="70">
+            <h1 class = "header-item" id = "HomepageName">PicKraken</h1>
+            <h2 class = "header-item" id = "userName">${loggedUser.getUsername()}</h2>
         </div>
-        <div>
+        <div id = "release">
             <form action = "Upload" method = "POST">
-                <h3>Release here: <h3>
-                <input type = "text" name = "photoURL" placeholder = "Photo URL"/>
-                <input type = "text" name = "photoCaption" placeholder = "Caption"/>
-                <input type = "submit" value = "RELEASE"/>
+                <h3 id = "releaseTitle">Release here: </h3>
+                <input type = "text" class = "release-item" name = "photoURL" placeholder = "Photo URL"/>
+                <input type = "text" class = "release-item" name = "photoCaption" placeholder = "Caption"/>
+                <input type = "submit" id = "release-button" value = "Release!"/>
             </form>
         </div>
         
-        <div>
+        <div id = "photos">
             <%
                 User user = (User)session.getAttribute("loggedUser");
                 ArrayList<Photo> photos = user.getUserPhotos();
                 
                 for(Photo photo : photos){
-                    System.out.println(photo.getPath());
             %>
+            <div class = "photo">    
                 <form action = "View" method = "POST">
                     <img src = "<%=photo.getPath()%>" height="200" width="200"/>
                     <input type="hidden" name = "PhotoID" value = "<%=photo.getPhotoID()%>"/>
                     <input type="hidden" name = "Path" value = "<%=photo.getPath()%>"/>
                     <input type="hidden" name = "Caption" value = "<%=photo.getCaption()%>"/>
-                    <input type = "submit" value = "Edit" />
+                    <input type = "submit" class = "edit-button"value = "Edit" />
                 </form>
+            </div>
             <%} %>
         </div>
     </body>
