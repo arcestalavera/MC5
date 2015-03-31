@@ -9,6 +9,7 @@ import Classes.User;
 import Database.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -83,6 +84,9 @@ public class Upload extends HttpServlet {
         String caption = request.getParameter("photoCaption");
         Database db = Database.getInstance();
         db.addPicture(userID, path, caption);
+        
+        RequestDispatcher view = request.getRequestDispatcher("Homepage.jsp");
+        view.forward(request, response);
     }
 
     /**
