@@ -72,13 +72,6 @@ public class View extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        int PhotoID = Integer.parseInt(request.getParameter("PhotoID"));
-        String Path = request.getParameter("Path");
-        String Caption = request.getParameter("Caption");
-        
-        request.setAttribute("PhotoID", PhotoID);
-        request.setAttribute("Path", Path);
-        request.setAttribute("Caption", Caption);
         
         RequestDispatcher view = request.getRequestDispatcher("Edit.jsp");
         view.forward(request, response);

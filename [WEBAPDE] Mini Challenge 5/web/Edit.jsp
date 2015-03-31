@@ -8,10 +8,10 @@
         <link rel="shortcut icon" href="img/KrakenIco.ico"/>
     </head>
     <body>
-        <img src = "${Path}" height="500" width="500"/>
-        <p>${Caption}</p>
+        <img src = "<%=request.getParameter("Path")%>" height="500" width="500"/>
+        <p><%=request.getParameter("Caption")%></p>
         <form>
-            <input type="hidden" name = "PhotoID" value = "${PhotoID}"/>
+            <input type="hidden" name = "PhotoID" value = "<%=request.getParameter("PhotoID")%>"/>
             <input type = "text" placeholder = "New Caption"/>
             <input type = "submit" value = "Edit Caption"/>
         </form>
