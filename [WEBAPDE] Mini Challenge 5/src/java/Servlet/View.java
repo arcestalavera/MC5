@@ -5,23 +5,18 @@
  */
 package Servlet;
 
-import Classes.Photo;
-import Classes.User;
-import Database.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Arren Antioquia
  */
-public class Upload extends HttpServlet {
+public class View extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +35,10 @@ public class Upload extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Upload</title>");            
+            out.println("<title>Servlet View</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Upload at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet View at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,23 +70,7 @@ public class Upload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("loggedUser");
-        
-        int userID = user.getUserID();
-        String path = request.getParameter("photoURL");
-        String caption = request.getParameter("photoCaption");
-        Database db = Database.getInstance();
-        db.addPicture(userID, path, caption);
-        
-        Photo photo = new Photo(db.getMaxPhotoID() + 1, path, caption);
-        
-        user.getUserPhotos().add(photo);
-        
-        RequestDispatcher view = request.getRequestDispatcher("Homepage.jsp");
-        view.forward(request, response);
+        processRequest(request, response);
     }
 
     /**

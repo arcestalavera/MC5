@@ -16,6 +16,10 @@
         <servlet-name>Edit</servlet-name>
         <servlet-class>Servlet.Edit</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>View</servlet-name>
+        <servlet-class>Servlet.View</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Edit</servlet-name>
         <url-pattern>/Edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>View</servlet-name>
+        <url-pattern>/View</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

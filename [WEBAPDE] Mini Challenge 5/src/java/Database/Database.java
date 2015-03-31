@@ -140,6 +140,23 @@ public class Database {
         return userID;
     }
     
+    public int getMaxPhotoID(){
+        int photoID = 0;
+        sql = "SELECT max(photoID) FROM photo";
+        
+        try{
+            rs = stmt.executeQuery(sql);
+            if(rs.next())
+            {
+                photoID = rs.getInt("photoID");
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return photoID;
+    }
+    
     public ArrayList<Photo> getUserPhoto(int userID){
         ArrayList<Photo> userPhotos = new ArrayList<>();
         sql = "SELECT * from photo"

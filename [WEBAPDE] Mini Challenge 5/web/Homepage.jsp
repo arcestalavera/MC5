@@ -21,5 +21,9 @@
                 <input type = "submit" />
             </form>
         </div>
+        
+        <div>
+            <img />
+        </div>
     </body>
 </html>
