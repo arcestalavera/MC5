@@ -1,17 +1,19 @@
-<%-- 
-    Document   : Edit
-    Created on : Mar 31, 2015, 7:15:55 PM
-    Author     : Arren Antioquia
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Edit Picture Caption - PicKraken</title>
+        
+        <link rel="shortcut icon" href="img/KrakenIco.ico"/>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <img src = "${Path}" height="500" width="500"/>
+        <p>${Caption}</p>
+        <form>
+            <input type="hidden" name = "PhotoID" value = "${PhotoID}"/>
+            <input type = "text" placeholder = "New Caption"/>
+            <input type = "submit" value = "Edit Caption"/>
+        </form>
     </body>
 </html>

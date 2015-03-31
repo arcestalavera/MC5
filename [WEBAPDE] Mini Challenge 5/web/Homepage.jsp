@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="Classes.Photo"%>
+<%@page import="Classes.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +26,21 @@
         </div>
         
         <div>
-            <img />
+            <%
+                User user = (User)session.getAttribute("loggedUser");
+                ArrayList<Photo> photos = user.getUserPhotos();
+                
+                for(Photo photo : photos){
+                    System.out.println(photo.getPath());
+            %>
+                <form action = "View" method = "POST">
+                    <img src = "<%=photo.getPath()%>" height="200" width="200"/>
+                    <input type="hidden" name = "PhotoID" value = "<%=photo.getPhotoID()%>"/>
+                    <input type="hidden" name = "Path" value = "<%=photo.getPath()%>"/>
+                    <input type="hidden" name = "Caption" value = "<%=photo.getCaption()%>"/>
+                    <input type = "submit" value = "Edit" />
+                </form>
+            <%} %>
         </div>
     </body>
 </html>

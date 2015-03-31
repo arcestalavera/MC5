@@ -160,7 +160,7 @@ public class Database {
     public ArrayList<Photo> getUserPhoto(int userID){
         ArrayList<Photo> userPhotos = new ArrayList<>();
         sql = "SELECT * from photo"
-                + "WHERE userID = " + userID;
+                + " WHERE userID = " + userID;
         try{
             rs = stmt.executeQuery(sql);
             while(rs.next()){
